@@ -69,21 +69,39 @@ const allItems: MenuItem[] = [
   { name: "Chilli Guava Mojito", desc: "Spicy guava kick", price: "₹169", image: chilliGuavaImg, category: "mojito" },
 ];
 
+type CategoryFilter = "all" | "shake" | "frappe" | "mojito";
+
+const categories: { key: CategoryFilter; label: string }[] = [
+  { key: "all", label: "ALL" },
+  { key: "shake", label: "SHAKES" },
+  { key: "frappe", label: "FRAPPES" },
+  { key: "mojito", label: "MOJITOS" },
+];
+
 const Index = () => {
   const [search, setSearch] = useState("");
+  const [activeFilter, setActiveFilter] = useState<CategoryFilter>("all");
   const isSearching = search.trim().length > 0;
-
-  const filtered = useMemo(() => {
-    if (!isSearching) return null;
-    const q = search.toLowerCase();
-    return allItems.filter(
-      (item) => item.name.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q)
-    );
-  }, [search, isSearching]);
 
   const shakes = allItems.filter((i) => i.category === "shake");
   const frappes = allItems.filter((i) => i.category === "frappe");
   const mojitos = allItems.filter((i) => i.category === "mojito");
+
+  const categoryCount = (key: CategoryFilter) => {
+    if (key === "all") return allItems.length;
+    return allItems.filter((i) => i.category === key).length;
+  };
+
+  const filtered = useMemo(() => {
+    let items = activeFilter === "all" ? allItems : allItems.filter((i) => i.category === activeFilter);
+    if (isSearching) {
+      const q = search.toLowerCase();
+      items = items.filter(
+        (item) => item.name.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q)
+      );
+    }
+    return items;
+  }, [search, isSearching, activeFilter]);
 
   return (
     <div className="min-h-screen bg-background max-w-lg mx-auto">
