@@ -69,21 +69,39 @@ const allItems: MenuItem[] = [
   { name: "Chilli Guava Mojito", desc: "Spicy guava kick", price: "₹169", image: chilliGuavaImg, category: "mojito" },
 ];
 
+type CategoryFilter = "all" | "shake" | "frappe" | "mojito";
+
+const categories: { key: CategoryFilter; label: string }[] = [
+  { key: "all", label: "ALL" },
+  { key: "shake", label: "SHAKES" },
+  { key: "frappe", label: "FRAPPES" },
+  { key: "mojito", label: "MOJITOS" },
+];
+
 const Index = () => {
   const [search, setSearch] = useState("");
+  const [activeFilter, setActiveFilter] = useState<CategoryFilter>("all");
   const isSearching = search.trim().length > 0;
-
-  const filtered = useMemo(() => {
-    if (!isSearching) return null;
-    const q = search.toLowerCase();
-    return allItems.filter(
-      (item) => item.name.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q)
-    );
-  }, [search, isSearching]);
 
   const shakes = allItems.filter((i) => i.category === "shake");
   const frappes = allItems.filter((i) => i.category === "frappe");
   const mojitos = allItems.filter((i) => i.category === "mojito");
+
+  const categoryCount = (key: CategoryFilter) => {
+    if (key === "all") return allItems.length;
+    return allItems.filter((i) => i.category === key).length;
+  };
+
+  const filtered = useMemo(() => {
+    let items = activeFilter === "all" ? allItems : allItems.filter((i) => i.category === activeFilter);
+    if (isSearching) {
+      const q = search.toLowerCase();
+      items = items.filter(
+        (item) => item.name.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q)
+      );
+    }
+    return items;
+  }, [search, isSearching, activeFilter]);
 
   return (
     <div className="min-h-screen bg-background max-w-lg mx-auto">
@@ -133,24 +151,45 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Search Results or Full Menu */}
+      {/* Category Filter Pills */}
+      <div className="px-6 pb-2">
+        <div className="flex gap-2 bg-surface rounded-full p-1.5 border border-foreground/5">
+          {categories.map((cat) => (
+            <button
+              key={cat.key}
+              onClick={() => setActiveFilter(cat.key)}
+              className={`flex-1 px-3 py-2.5 rounded-full text-xs font-bold tracking-wider transition-all duration-300 ${
+                activeFilter === cat.key
+                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {cat.label} ({categoryCount(cat.key)})
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Menu Items */}
       <AnimatePresence mode="wait">
-        {isSearching ? (
+        {isSearching || activeFilter !== "all" ? (
           <motion.div
-            key="search-results"
+            key={`filtered-${activeFilter}-${search}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="pb-8"
           >
-            <div className="px-6 py-3">
-              <p className="text-muted-foreground text-xs">
-                {filtered!.length} result{filtered!.length !== 1 ? "s" : ""} for "{search}"
-              </p>
-            </div>
-            {filtered!.length > 0 ? (
-              filtered!.map((item, i) => (
+            {isSearching && (
+              <div className="px-6 py-3">
+                <p className="text-muted-foreground text-xs">
+                  {filtered.length} result{filtered.length !== 1 ? "s" : ""} for "{search}"
+                </p>
+              </div>
+            )}
+            {filtered.length > 0 ? (
+              filtered.map((item, i) => (
                 <MenuCard
                   key={item.name}
                   name={item.name}
@@ -162,7 +201,7 @@ const Index = () => {
               ))
             ) : (
               <div className="px-6 py-16 text-center">
-                <p className="text-muted-foreground text-sm">No drinks found. Try a different search.</p>
+                <p className="text-muted-foreground text-sm">No drinks found.</p>
               </div>
             )}
           </motion.div>
