@@ -265,6 +265,7 @@ const Index = () => {
       </AnimatePresence>
 
       <FAQSection />
+      </main>
 
       {/* Footer */}
       <footer className="px-6 py-12 text-center space-y-4">
@@ -278,13 +279,14 @@ const Index = () => {
             href="https://instagram.com/frappesculture"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Follow Frappes Culture on Instagram"
             className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
           >
-            <Instagram className="w-4 h-4" />
+            <Instagram className="w-4 h-4" aria-hidden="true" />
             @frappesculture
           </a>
         </div>
-        <p className="text-muted-foreground/50 text-xs">
+        <p className="text-muted-foreground text-xs">
           © 2026 Frappes Culture. All rights reserved.
         </p>
       </footer>
