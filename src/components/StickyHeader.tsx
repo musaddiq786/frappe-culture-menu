@@ -5,9 +5,9 @@ const StickyHeader = () => {
     <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background/80 backdrop-blur-xl border-b border-foreground/5">
       <div className="w-5" />
       <div className="text-center">
-        <h1 className="text-xs font-bold tracking-[0.2em] text-foreground uppercase">
+        <p className="text-xs font-bold tracking-[0.2em] text-foreground uppercase">
           Frappes Culture
-        </h1>
+        </p>
       </div>
       <a
         href="https://instagram.com/frappesculture"
