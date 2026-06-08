@@ -107,8 +107,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background max-w-lg mx-auto">
+      <Helmet>
+        <title>Frappes Culture Chiplun — Famous Coffee, Shakes & Juice Center</title>
+        <meta
+          name="description"
+          content="Chiplun's famous coffee, shake & juice center. Premium cold coffee, frappes, thick shakes and mojitos. Scan, browse the menu, order at the counter."
+        />
+        <link rel="canonical" href="https://frappe-culture.lovable.app/" />
+        <meta property="og:url" content="https://frappe-culture.lovable.app/" />
+      </Helmet>
       <StickyHeader />
 
+      <main>
       {/* Hero */}
       <header className="px-6 pt-12 pb-4">
         <motion.h1
