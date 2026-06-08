@@ -4,6 +4,7 @@ import { CupSoda, Coffee, Citrus, Instagram, Search, X } from "lucide-react";
 import StickyHeader from "@/components/StickyHeader";
 import MenuSection from "@/components/MenuSection";
 import MenuCard from "@/components/MenuCard";
+import FAQSection from "@/components/FAQSection";
 
 // Shake images
 import belgianChocolateImg from "@/assets/shake.jpg";
@@ -233,6 +234,8 @@ const Index = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <FAQSection />
 
       {/* Footer */}
       <footer className="px-6 py-12 text-center space-y-4">
