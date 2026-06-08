@@ -8,6 +8,7 @@ const StickyHeader = () => {
         <p className="text-xs font-bold tracking-[0.2em] text-foreground uppercase">
           Frappes Culture
         </p>
+        <p className="text-[10px] text-muted-foreground tracking-wider">Chiplun · Coffee & Shakes</p>
       </div>
       <a
         href="https://instagram.com/frappesculture"

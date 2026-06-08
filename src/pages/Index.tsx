@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import { CupSoda, Coffee, Citrus, Instagram, Search, X } from "lucide-react";
 import StickyHeader from "@/components/StickyHeader";
@@ -106,8 +107,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background max-w-lg mx-auto">
+      <Helmet>
+        <title>Frappes Culture Chiplun — Famous Coffee, Shakes & Juice Center</title>
+        <meta
+          name="description"
+          content="Chiplun's famous coffee, shake & juice center. Premium cold coffee, frappes, thick shakes and mojitos. Scan, browse the menu, order at the counter."
+        />
+        <link rel="canonical" href="https://frappe-culture.lovable.app/" />
+        <meta property="og:url" content="https://frappe-culture.lovable.app/" />
+      </Helmet>
       <StickyHeader />
 
+      <main>
       {/* Hero */}
       <header className="px-6 pt-12 pb-4">
         <motion.h1
@@ -141,14 +152,32 @@ const Index = () => {
             placeholder="Search drinks..."
             className="w-full pl-11 pr-10 py-3 bg-surface rounded-2xl border border-foreground/5 text-foreground placeholder:text-muted-foreground text-sm font-medium focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all"
           />
+      {/* Search Bar */}
+      <div className="px-6 py-4 sticky top-16 z-45 bg-background/95 backdrop-blur-sm">
+        <div className="relative">
+          <label htmlFor="drink-search" className="sr-only">Search drinks</label>
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" aria-hidden="true" />
+          <input
+            id="drink-search"
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search drinks..."
+            aria-label="Search drinks"
+            className="w-full pl-11 pr-10 py-3 bg-surface rounded-2xl border border-foreground/5 text-foreground placeholder:text-muted-foreground text-sm font-medium focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all"
+          />
           {isSearching && (
             <button
+              type="button"
               onClick={() => setSearch("")}
+              aria-label="Clear search"
               className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-foreground/10 transition-colors"
             >
-              <X className="w-4 h-4 text-muted-foreground" />
+              <X className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
             </button>
           )}
+        </div>
+      </div>
         </div>
       </div>
 
@@ -236,6 +265,7 @@ const Index = () => {
       </AnimatePresence>
 
       <FAQSection />
+      </main>
 
       {/* Footer */}
       <footer className="px-6 py-12 text-center space-y-4">
@@ -249,13 +279,14 @@ const Index = () => {
             href="https://instagram.com/frappesculture"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Follow Frappes Culture on Instagram"
             className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
           >
-            <Instagram className="w-4 h-4" />
+            <Instagram className="w-4 h-4" aria-hidden="true" />
             @frappesculture
           </a>
         </div>
-        <p className="text-muted-foreground/50 text-xs">
+        <p className="text-muted-foreground text-xs">
           © 2026 Frappes Culture. All rights reserved.
         </p>
       </footer>
