@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import { CupSoda, Coffee, Citrus, Instagram, Search, X } from "lucide-react";
 import StickyHeader from "@/components/StickyHeader";
