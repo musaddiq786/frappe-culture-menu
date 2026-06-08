@@ -152,14 +152,32 @@ const Index = () => {
             placeholder="Search drinks..."
             className="w-full pl-11 pr-10 py-3 bg-surface rounded-2xl border border-foreground/5 text-foreground placeholder:text-muted-foreground text-sm font-medium focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all"
           />
+      {/* Search Bar */}
+      <div className="px-6 py-4 sticky top-16 z-45 bg-background/95 backdrop-blur-sm">
+        <div className="relative">
+          <label htmlFor="drink-search" className="sr-only">Search drinks</label>
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" aria-hidden="true" />
+          <input
+            id="drink-search"
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search drinks..."
+            aria-label="Search drinks"
+            className="w-full pl-11 pr-10 py-3 bg-surface rounded-2xl border border-foreground/5 text-foreground placeholder:text-muted-foreground text-sm font-medium focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all"
+          />
           {isSearching && (
             <button
+              type="button"
               onClick={() => setSearch("")}
+              aria-label="Clear search"
               className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-foreground/10 transition-colors"
             >
-              <X className="w-4 h-4 text-muted-foreground" />
+              <X className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
             </button>
           )}
+        </div>
+      </div>
         </div>
       </div>
 
