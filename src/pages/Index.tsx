@@ -235,6 +235,8 @@ const Index = () => {
         )}
       </AnimatePresence>
 
+      <FAQSection />
+
       {/* Footer */}
       <footer className="px-6 py-12 text-center space-y-4">
         <div className="inline-block px-6 py-3 rounded-full border border-primary/20 bg-primary/5">
