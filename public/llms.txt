@@ -1,0 +1,13 @@
+# Frappes Culture
+
+> Chiplun's famous coffee, shake and juice center — premium cold coffee, frappes, thick milkshakes and mojitos. Scan, browse the menu, order at the counter.
+
+Frappes Culture is a café in Chiplun, Maharashtra serving cold coffee, frappes, shakes and mojitos. The site is a mobile-first digital menu that opens when customers scan the QR code on their table.
+
+## Pages
+
+- [Menu](/): Full digital menu with shakes, frappes, mojitos and FAQs.
+
+## Optional
+
+- [Instagram](https://instagram.com/frappesculture): Latest drinks and updates.
